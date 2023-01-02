@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import { init, getOwnBlance } from "./web3Client";
 
 function App() {
+  const [minted, setMinted] = useState(false);
+  const [balance, setBalance] = useState(false);
+
+  const mint = () => {
+    setMinted(true);
+  };
+  const fetchBalance = () => {
+    getOwnBlance()
+      .then((balance) => {
+        setBalance(balance);
+      })
+      .catch((err) => {
+        console.log('balance error',err);
+      });
+  };
+
+  // useEffect(() => {
+  //   init();
+  // }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {!minted ? (
+        <button onClick={() => mint()}>mint Token</button>
+      ) : (
+        <p>token minted successfully</p>
+      )}
+
+      <p>your balance is :{balance}</p>
+      <button onClick={() => fetchBalance()}>refresh</button>
     </div>
   );
 }
