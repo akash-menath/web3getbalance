@@ -28,31 +28,32 @@ export const init = async () => {
   const networkId = await web3.eth.net.getId();
   console.log(networkId);
 
-  const erc20Abi = [
+  const xccerc20Abi = [
     {
-      constant: true,
-      inputs: [
-        {
-          name: "_owner",
-          type: "address",
-        },
-      ],
-      name: "balanceOf",
-      outputs: [
-        {
-          name: "balance",
-          type: "uint256",
-        },
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function",
-    },
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_owner",
+            "type": "address"
+          }
+        ],
+        "name": "balanceOf",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "balance",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
   ];
+  
 
   xccerc20Contract = new web3.eth.Contract(
-    erc20Abi,
-    "0x69b99bb640eec37111c7d3d725ae03d346862e71"
+   xccerc20Abi,
+    "0x8FCB1eC0135EA7b53C49B8dE3f2f7349cE6709c9"
   );
   console.log(111,xccerc20Contract);
   isInitialised=true
