@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
-import { init, getOwnBlance } from "./web3Client";
+import {  useState } from "react";
+import { getOwnBlance,mintToken } from "./web3Client";
 
 function App() {
   const [minted, setMinted] = useState(false);
   const [balance, setBalance] = useState(false);
 
-  const mint = () => {
+  const mint = async() => {
+   await mintToken()
     setMinted(true);
   };
   const fetchBalance = () => {
@@ -18,9 +19,6 @@ function App() {
       });
   };
 
-  // useEffect(() => {
-  //   init();
-  // }, []);
   return (
     <div>
       {!minted ? (
